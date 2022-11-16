@@ -27,7 +27,7 @@ class NewNotes extends StatelessWidget {
                 decoration: const BoxDecoration(
                     color: Colors.yellow,
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child: const Icon(Icons.add, size: 36.0, color: Colors.black),
+                child: const Icon(Icons.add, size: 40.0, color: Colors.black),
               ),
             ],
           ),
