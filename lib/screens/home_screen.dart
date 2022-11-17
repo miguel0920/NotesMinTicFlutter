@@ -22,10 +22,11 @@ class Home extends StatelessWidget {
             context: context,
             pageBuilder: (context, anim1, anim2) {
               return Align(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.bottomRight,
                 child: Container(
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 1),
+                    color: const Color.fromRGBO(217, 217, 217, 50),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   height: 100,
@@ -33,17 +34,35 @@ class Home extends StatelessWidget {
                       const EdgeInsets.only(bottom: 80, left: 12, right: 12),
                   child: SizedBox.expand(
                       child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Usuario123',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      TextButton(
-                        child: const Text("SALIR",
+                      const Padding(
+                        padding: EdgeInsets.only(
+                            left: 15.0, right: 0.0, top: 10.0, bottom: 0.0),
+                        child: Text('Usuario123',
                             style: TextStyle(
-                              color: Colors.black,
-                            )),
-                        onPressed: () {},
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24.0,
+                                decoration: TextDecoration.none)),
+                      ),
+                      Divider(
+                        color: Colors.black.withOpacity(0.5),
+                        thickness: 2.0,
+                        indent: 15.0,
+                        endIndent: 15.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 0.0, top: 2.0, bottom: 0.0),
+                        child: TextButton(
+                          child: const Text("SALIR",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  decoration: TextDecoration.none)),
+                          onPressed: () {},
+                        ),
                       ),
                     ],
                   )),
@@ -71,36 +90,4 @@ class Home extends StatelessWidget {
       ),
     );
   }
-}
-
-showAlertDialog(BuildContext context) {
-  // set up the button
-  Widget logOut = TextButton(
-    child: const Text("SALIR",
-        style: TextStyle(
-          color: Colors.black,
-        )),
-    onPressed: () {},
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
-    title: const Text(
-      "Usuario132",
-      style: TextStyle(fontWeight: FontWeight.bold),
-    ),
-    actionsAlignment: MainAxisAlignment.start,
-    actions: [
-      logOut,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }

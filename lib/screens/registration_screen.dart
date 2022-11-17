@@ -2,11 +2,11 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:noteminticflutter/screens/home_screen.dart';
+import 'package:noteminticflutter/screens/login_screen.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
-import 'package:noteminticflutter/screens/registration_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({
+class Registration extends StatelessWidget {
+  const Registration({
     Key? key,
     required GlobalKey<FormState> formKey,
   })  : _formKey = formKey,
@@ -24,12 +24,14 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text('Registro',
+                  style: TextStyle(fontSize: 24.0, color: Colors.black)),
               const Text('NOTapp',
                   style: TextStyle(
                       fontSize: 40.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.black)),
-              Image.asset('images/logo_login.png', width: 140.0, height: 160.0),
+              Image.asset('images/logo_login.png', width: 80.0, height: 100.0),
               const SizedBox(
                 height: 40.0,
               ),
@@ -37,8 +39,6 @@ class LoginScreen extends StatelessWidget {
                 key: _formKey,
                 child: Column(children: <Widget>[
                   TextFormField(
-                    controller:
-                        TextEditingController(text: "pruebas@gmail.com"),
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.start,
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0))),
                         filled: true,
-                        fillColor: Color.fromRGBO(107, 106, 106, 1),
+                        fillColor: Color.fromARGB(255, 0, 0, 0),
                         hintText: 'Correo electronico',
                         hintStyle: TextStyle(fontSize: 18, color: Colors.white),
                         contentPadding: EdgeInsets.only(
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(107, 106, 106, 1)),
+                                color: Color.fromARGB(255, 0, 0, 0)),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)))),
                     validator: (String? email) {
@@ -71,35 +71,6 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  // TextFormField(
-                  //   obscureText: true,
-                  //   decoration: const InputDecoration(
-                  //     focusedBorder: OutlineInputBorder(
-                  //         borderSide: BorderSide(
-                  //             width: 2.0,
-                  //             color: Color.fromRGBO(107, 106, 106, 1)),
-                  //         borderRadius:
-                  //             BorderRadius.all(Radius.circular(10.0))),
-                  //     filled: true,
-                  //     fillColor: Color.fromRGBO(107, 106, 106, 1),
-                  //     hintText: 'Contraseña',
-                  //     hintStyle: TextStyle(fontSize: 18, color: Colors.white),
-                  //     contentPadding: EdgeInsets.only(
-                  //         left: 15, top: 8, right: 15, bottom: 0),
-                  //     enabledBorder: OutlineInputBorder(
-                  //         borderSide: BorderSide(
-                  //             width: 2.0,
-                  //             color: Color.fromRGBO(107, 106, 106, 1)),
-                  //         borderRadius:
-                  //             BorderRadius.all(Radius.circular(10.0))),
-                  //   ),
-                  //   validator: (String? password) {
-                  //     if (password == null || password.isEmpty) {
-                  //       return 'Ingrese la contraseña';
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
                   const MyTextFielPassword(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Registration(
+                                  builder: (context) => LoginScreen(
                                         formKey: GlobalKey(),
                                       )),
                             );
@@ -122,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                                   const TextStyle(fontSize: 16)),
                               backgroundColor: MaterialStateProperty.all(
                                   const Color.fromRGBO(167, 167, 167, 1))),
-                          child: const Text('Registrar'),
+                          child: const Text('Volver'),
                         ),
                       ),
                       Padding(
@@ -142,8 +113,8 @@ class LoginScreen extends StatelessWidget {
                                 textStyle: MaterialStateProperty.all(
                                     const TextStyle(fontSize: 16.0)),
                                 backgroundColor:
-                                    MaterialStateProperty.all(Colors.black)),
-                            child: const Text('Ingresar'),
+                                    MaterialStateProperty.all(Colors.green)),
+                            child: const Text('Registrar'),
                           )),
                     ],
                   ),
