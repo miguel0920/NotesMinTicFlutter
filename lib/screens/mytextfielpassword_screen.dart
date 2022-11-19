@@ -3,7 +3,11 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 
 class MyTextFielPassword extends StatefulWidget {
-  const MyTextFielPassword({super.key});
+  final Color fillColor;
+  final Color textStyleColor;
+  const MyTextFielPassword(
+      {key, required this.fillColor, required this.textStyleColor})
+      : super(key: key);
 
   @override
   State<MyTextFielPassword> createState() => _MyTextFielPassword();
@@ -19,6 +23,7 @@ class _MyTextFielPassword extends State<MyTextFielPassword> {
         },
         controller: TextEditingController(text: "Vignesh123!"),
         obscureText: hidePassword,
+        style: TextStyle(color: widget.textStyleColor),
         decoration: InputDecoration(
           suffixIcon: IconButton(
             color: Colors.black,
@@ -36,7 +41,7 @@ class _MyTextFielPassword extends State<MyTextFielPassword> {
                   width: 2.0, color: Color.fromRGBO(107, 106, 106, 1)),
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
           filled: true,
-          fillColor: const Color.fromRGBO(107, 106, 106, 1),
+          fillColor: widget.fillColor,
           hintText: 'Contraseña',
           hintStyle: const TextStyle(fontSize: 18, color: Colors.white),
           contentPadding:

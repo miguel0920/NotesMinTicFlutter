@@ -1,8 +1,6 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:noteminticflutter/screens/home_screen.dart';
-import 'package:noteminticflutter/screens/login_screen.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
 
 class Registration extends StatelessWidget {
@@ -42,6 +40,7 @@ class Registration extends StatelessWidget {
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.start,
+                    style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -71,7 +70,9 @@ class Registration extends StatelessWidget {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const MyTextFielPassword(),
+                  const MyTextFielPassword(
+                      fillColor: Color.fromARGB(255, 0, 0, 0),
+                      textStyleColor: Colors.white),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -80,13 +81,7 @@ class Registration extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             // Process data.
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen(
-                                        formKey: GlobalKey(),
-                                      )),
-                            );
+                            Navigator.of(context).pushReplacementNamed('/');
                           },
                           style: ButtonStyle(
                               textStyle: MaterialStateProperty.all(
@@ -102,18 +97,19 @@ class Registration extends StatelessWidget {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 // Process data.
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Home()),
-                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content:
+                                      Text("Usuario registrado correctamente."),
+                                ));
+                                Navigator.of(context).pushReplacementNamed('/');
                               }
                             },
                             style: ButtonStyle(
                                 textStyle: MaterialStateProperty.all(
                                     const TextStyle(fontSize: 16.0)),
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.green)),
+                                backgroundColor: MaterialStateProperty.all(
+                                    const Color.fromRGBO(20, 255, 0, 1))),
                             child: const Text('Registrar'),
                           )),
                     ],

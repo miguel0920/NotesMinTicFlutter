@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:noteminticflutter/screens/home_screen.dart';
 import 'package:noteminticflutter/screens/login_screen.dart';
+import 'package:noteminticflutter/screens/registration_screen.dart';
 
 void main() {
   runApp(const Login());
@@ -21,7 +23,12 @@ class _LoginNotes extends State<Login> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Inter'),
       title: "NOTapp",
-      home: LoginScreen(formKey: _formKey),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginScreen(formKey: _formKey),
+        '/home': (context) => const Home(),
+        '/register': (context) => Registration(formKey: GlobalKey())
+      },
     );
   }
 }

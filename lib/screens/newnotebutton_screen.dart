@@ -2,8 +2,8 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
-class NewNotes extends StatelessWidget {
-  const NewNotes({
+class NewNoteButton extends StatelessWidget {
+  const NewNoteButton({
     Key? key,
   }) : super(key: key);
 

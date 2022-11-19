@@ -1,9 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:noteminticflutter/screens/home_screen.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
-import 'package:noteminticflutter/screens/registration_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({
@@ -100,7 +98,9 @@ class LoginScreen extends StatelessWidget {
                   //     return null;
                   //   },
                   // ),
-                  const MyTextFielPassword(),
+                  const MyTextFielPassword(
+                      fillColor: Color.fromRGBO(107, 106, 106, 1),
+                      textStyleColor: Colors.black),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -108,14 +108,8 @@ class LoginScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            // Process data.
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Registration(
-                                        formKey: GlobalKey(),
-                                      )),
-                            );
+                            Navigator.of(context)
+                                .pushReplacementNamed('/register');
                           },
                           style: ButtonStyle(
                               textStyle: MaterialStateProperty.all(
@@ -130,12 +124,8 @@ class LoginScreen extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                // Process data.
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Home()),
-                                );
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
                               }
                             },
                             style: ButtonStyle(
