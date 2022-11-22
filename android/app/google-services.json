@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1023358873388",
+    "project_id": "notesminticflutter",
+    "storage_bucket": "notesminticflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023358873388:android:7b47dd0f770c450d290689",
+        "android_client_info": {
+          "package_name": "com.example.noteminticflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023358873388-36nmmurkurt1hg125kpqtrnk5f9857p5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6B1H1RQwgVrVJK-0AUidKaIXeptG94Aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023358873388-36nmmurkurt1hg125kpqtrnk5f9857p5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023358873388-b5lsnrqmo4h3gk0kn7ido4a40cn9irgf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.noteminticflutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
