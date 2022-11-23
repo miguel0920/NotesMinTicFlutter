@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 class MyTextFielPassword extends StatefulWidget {
   final Color fillColor;
   final Color textStyleColor;
+  final ValueChanged<String> passwordChange;
   const MyTextFielPassword(
-      {key, required this.fillColor, required this.textStyleColor})
+      {key,
+      required this.fillColor,
+      required this.textStyleColor,
+      required this.passwordChange})
       : super(key: key);
 
   @override
@@ -19,9 +23,9 @@ class _MyTextFielPassword extends State<MyTextFielPassword> {
   Widget build(BuildContext context) {
     return TextFormField(
         onChanged: (value) {
+          widget.passwordChange(value);
           hidePassword = false;
         },
-        controller: TextEditingController(text: "Vignesh123!"),
         obscureText: hidePassword,
         style: TextStyle(color: widget.textStyleColor),
         decoration: InputDecoration(

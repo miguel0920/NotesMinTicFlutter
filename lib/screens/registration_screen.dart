@@ -2,12 +2,16 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
+import 'package:noteminticflutter/appState.dart';
 
 class Registration extends StatelessWidget {
-  const Registration({
-    Key? key,
-    required GlobalKey<FormState> formKey,
-  })  : _formKey = formKey,
+  static late String password;
+  static TextEditingController email = TextEditingController();
+  final AppState state;
+
+  const Registration(
+      {Key? key, required GlobalKey<FormState> formKey, required this.state})
+      : _formKey = formKey,
         super(key: key);
 
   final GlobalKey<FormState> _formKey;
@@ -37,6 +41,7 @@ class Registration extends StatelessWidget {
                 key: _formKey,
                 child: Column(children: <Widget>[
                   TextFormField(
+                    controller: email,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.start,
@@ -70,9 +75,13 @@ class Registration extends StatelessWidget {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const MyTextFielPassword(
-                      fillColor: Color.fromARGB(255, 0, 0, 0),
-                      textStyleColor: Colors.white),
+                  MyTextFielPassword(
+                    fillColor: const Color.fromARGB(255, 0, 0, 0),
+                    textStyleColor: Colors.white,
+                    passwordChange: (value) {
+                      password = value;
+                    },
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -94,15 +103,27 @@ class Registration extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                // Process data.
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content:
-                                      Text("Usuario registrado correctamente."),
-                                ));
-                                Navigator.of(context).pushReplacementNamed('/');
+                                try {
+                                  await state
+                                      .register(email.text, password)
+                                      .then((value) => {
+                                            if (state.user != null)
+                                              {
+                                                Navigator.of(context)
+                                                    .pushReplacementNamed(
+                                                        '/home')
+                                              }
+                                          });
+                                } catch (e) {
+                                  print(e);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text(
+                                        "El correo ya se encuentra registrado."),
+                                  ));
+                                }
                               }
                             },
                             style: ButtonStyle(

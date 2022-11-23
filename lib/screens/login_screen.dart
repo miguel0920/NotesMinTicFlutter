@@ -1,23 +1,19 @@
 import 'dart:core';
 
-import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
+import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({
-    Key? key,
-    required GlobalKey<FormState> formKey,
-  })  : _formKey = formKey,
-        super(key: key);
-
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-    return firebaseApp;
-  }
-
+  final AppState state;
+  static TextEditingController email = TextEditingController();
   final GlobalKey<FormState> _formKey;
+  static late String password;
+
+  const LoginScreen(
+      {Key? key, required GlobalKey<FormState> formKey, required this.state})
+      : _formKey = formKey,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,72 +38,46 @@ class LoginScreen extends StatelessWidget {
                 key: _formKey,
                 child: Column(children: <Widget>[
                   TextFormField(
-                    controller:
-                        TextEditingController(text: "pruebas@gmail.com"),
-                    autofocus: true,
-                    keyboardType: TextInputType.emailAddress,
-                    textAlign: TextAlign.start,
-                    decoration: const InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2.0,
-                                color: Color.fromRGBO(107, 106, 106, 1)),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        filled: true,
-                        fillColor: Color.fromRGBO(107, 106, 106, 1),
-                        hintText: 'Correo electronico',
-                        hintStyle: TextStyle(fontSize: 18, color: Colors.white),
-                        contentPadding: EdgeInsets.only(
-                            left: 15, top: 8, right: 15, bottom: 0),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2.0,
-                                color: Color.fromRGBO(107, 106, 106, 1)),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)))),
-                    validator: (String? email) {
-                      if (email == null || email.isEmpty) {
-                        return 'Ingrese el correo electronico';
-                      }
-                      return null;
-                    },
-                  ),
+                      controller: email,
+                      autofocus: true,
+                      keyboardType: TextInputType.emailAddress,
+                      textAlign: TextAlign.start,
+                      decoration: const InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2.0,
+                                  color: Color.fromRGBO(107, 106, 106, 1)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          filled: true,
+                          fillColor: Color.fromRGBO(107, 106, 106, 1),
+                          hintText: 'Correo electronico',
+                          hintStyle:
+                              TextStyle(fontSize: 18, color: Colors.white),
+                          contentPadding: EdgeInsets.only(
+                              left: 15, top: 8, right: 15, bottom: 0),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2.0,
+                                  color: Color.fromRGBO(107, 106, 106, 1)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)))),
+                      validator: (String? email) {
+                        if (email == null || email.isEmpty) {
+                          return 'Ingrese el correo electronico';
+                        }
+                        return null;
+                      }),
                   const SizedBox(
                     height: 10.0,
                   ),
-                  // TextFormField(
-                  //   obscureText: true,
-                  //   decoration: const InputDecoration(
-                  //     focusedBorder: OutlineInputBorder(
-                  //         borderSide: BorderSide(
-                  //             width: 2.0,
-                  //             color: Color.fromRGBO(107, 106, 106, 1)),
-                  //         borderRadius:
-                  //             BorderRadius.all(Radius.circular(10.0))),
-                  //     filled: true,
-                  //     fillColor: Color.fromRGBO(107, 106, 106, 1),
-                  //     hintText: 'Contraseña',
-                  //     hintStyle: TextStyle(fontSize: 18, color: Colors.white),
-                  //     contentPadding: EdgeInsets.only(
-                  //         left: 15, top: 8, right: 15, bottom: 0),
-                  //     enabledBorder: OutlineInputBorder(
-                  //         borderSide: BorderSide(
-                  //             width: 2.0,
-                  //             color: Color.fromRGBO(107, 106, 106, 1)),
-                  //         borderRadius:
-                  //             BorderRadius.all(Radius.circular(10.0))),
-                  //   ),
-                  //   validator: (String? password) {
-                  //     if (password == null || password.isEmpty) {
-                  //       return 'Ingrese la contraseña';
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
-                  const MyTextFielPassword(
-                      fillColor: Color.fromRGBO(107, 106, 106, 1),
-                      textStyleColor: Colors.black),
+                  MyTextFielPassword(
+                    fillColor: const Color.fromRGBO(107, 106, 106, 1),
+                    textStyleColor: Colors.black,
+                    passwordChange: (value) {
+                      password = value;
+                    },
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -129,10 +99,27 @@ class LoginScreen extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/home');
+                                try {
+                                  await state
+                                      .logIn(email.text, password)
+                                      .then((value) => {
+                                            if (state.user != null)
+                                              {
+                                                Navigator.of(context)
+                                                    .pushReplacementNamed(
+                                                  '/home',
+                                                )
+                                              }
+                                          });
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text(
+                                        "Usuario o contraseña incorrecta."),
+                                  ));
+                                }
                               }
                             },
                             style: ButtonStyle(

@@ -1,21 +1,24 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/screens/newnotebutton_screen.dart';
 import 'package:noteminticflutter/screens/note_screen.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  final AppState state;
+  const Home({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final String name = state.user!.displayName ?? '';
     return Scaffold(
       backgroundColor: const Color.fromRGBO(91, 91, 90, 1),
       body: Column(children: const [NewNoteButton(), Note()]),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialogLogOut(context);
+          showDialogLogOut(context, name);
         },
         backgroundColor: Colors.yellow,
         shape: const RoundedRectangleBorder(
@@ -29,7 +32,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Future<Object?> showDialogLogOut(BuildContext context) {
+  Future<Object?> showDialogLogOut(BuildContext context, String name) {
     return showGeneralDialog(
       barrierLabel: "Label",
       barrierDismissible: true,
@@ -51,11 +54,11 @@ class Home extends StatelessWidget {
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                       left: 15.0, right: 0.0, top: 10.0, bottom: 0.0),
-                  child: Text('Usuario123',
-                      style: TextStyle(
+                  child: Text(name,
+                      style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 24.0,
@@ -72,6 +75,7 @@ class Home extends StatelessWidget {
                       left: 10.0, right: 0.0, top: 2.0, bottom: 0.0),
                   child: TextButton(
                     onPressed: () {
+                      state.logOut();
                       Navigator.of(context).pushReplacementNamed('/');
                     },
                     style: ButtonStyle(

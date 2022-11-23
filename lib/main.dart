@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/firebase_options.dart';
 import 'package:noteminticflutter/screens/home_screen.dart';
 import 'package:noteminticflutter/screens/login_screen.dart';
@@ -11,7 +12,10 @@ import 'package:noteminticflutter/screens/registration_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+      options: kIsWeb
+          ? DefaultFirebaseOptions.web
+          : DefaultFirebaseOptions.currentPlatform);
 
   if (kDebugMode) {
     try {
@@ -34,6 +38,7 @@ class Login extends StatefulWidget {
 
 class _LoginNotes extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final AppState state = AppState();
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +48,12 @@ class _LoginNotes extends State<Login> {
       title: "NOTapp",
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(formKey: _formKey),
-        '/home': (context) => const Home(),
-        '/register': (context) => Registration(formKey: GlobalKey())
+        '/': (context) => LoginScreen(formKey: _formKey, state: state),
+        '/home': (context) => Home(
+              state: state,
+            ),
+        '/register': (context) =>
+            Registration(formKey: GlobalKey(), state: state)
       },
     );
   }
