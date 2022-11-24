@@ -8,6 +8,7 @@ import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/firebase_options.dart';
 import 'package:noteminticflutter/screens/home_screen.dart';
 import 'package:noteminticflutter/screens/login_screen.dart';
+import 'package:noteminticflutter/screens/showDialogs/showdialognewnote_screen.dart';
 import 'package:noteminticflutter/screens/registration_screen.dart';
 
 void main() async {

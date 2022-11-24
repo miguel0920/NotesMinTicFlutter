@@ -27,6 +27,7 @@ class _MyTextFielPassword extends State<MyTextFielPassword> {
           hidePassword = false;
         },
         obscureText: hidePassword,
+        controller: TextEditingController(text: 'Admin@123'),
         style: TextStyle(color: widget.textStyleColor),
         decoration: InputDecoration(
           suffixIcon: IconButton(

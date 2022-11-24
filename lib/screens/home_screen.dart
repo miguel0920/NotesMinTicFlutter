@@ -4,21 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/screens/newnotebutton_screen.dart';
 import 'package:noteminticflutter/screens/note_screen.dart';
+import 'package:noteminticflutter/screens/showDialogs/showdialognewnote_screen.dart';
 
 class Home extends StatelessWidget {
   final AppState state;
+  static ShowDialogNewNote showDialogNewNote = ShowDialogNewNote();
   const Home({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final String name = state.user!.displayName ?? '';
+    //final String name = state.user!.displayName ?? '';
     return Scaffold(
       backgroundColor: const Color.fromRGBO(91, 91, 90, 1),
-      body: Column(children: const [NewNoteButton(), Note()]),
+      body: Column(children: [
+        NewNoteButton(
+            title: '', content: '', showDialogNewNote: showDialogNewNote),
+        const Note()
+      ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialogLogOut(context, name);
+          showDialogLogOut(context, 'Miguel');
         },
         backgroundColor: Colors.yellow,
         shape: const RoundedRectangleBorder(

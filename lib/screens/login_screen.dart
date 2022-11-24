@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
@@ -17,6 +18,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    email.text = 'admin@mintic.com';
     return Scaffold(
       backgroundColor: const Color.fromRGBO(232, 237, 7, 1),
       body: Padding(
@@ -101,25 +103,28 @@ class LoginScreen extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                try {
-                                  await state
-                                      .logIn(email.text, password)
-                                      .then((value) => {
-                                            if (state.user != null)
-                                              {
-                                                Navigator.of(context)
-                                                    .pushReplacementNamed(
-                                                  '/home',
-                                                )
-                                              }
-                                          });
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text(
-                                        "Usuario o contraseña incorrecta."),
-                                  ));
-                                }
+                                // try {
+                                //   await state
+                                //       .logIn(email.text, password)
+                                //       .then((value) => {
+                                //             if (state.user != null)
+                                //               {
+                                //                 Navigator.of(context)
+                                //                     .pushReplacementNamed(
+                                //                   '/home',
+                                //                 )
+                                //               }
+                                //           });
+                                // } catch (e) {
+                                //   ScaffoldMessenger.of(context)
+                                //       .showSnackBar(const SnackBar(
+                                //     content: Text(
+                                //         "Usuario o contraseña incorrecta."),
+                                //   ));
+                                // }
+                                Navigator.of(context).pushReplacementNamed(
+                                  '/home',
+                                );
                               }
                             },
                             style: ButtonStyle(

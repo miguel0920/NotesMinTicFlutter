@@ -1,11 +1,19 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:noteminticflutter/screens/showDialogs/showdialognewnote_screen.dart';
 
 class NewNoteButton extends StatelessWidget {
-  const NewNoteButton({
-    Key? key,
-  }) : super(key: key);
+  final String title;
+  final String content;
+  final ShowDialogNewNote showDialogNewNote;
+
+  const NewNoteButton(
+      {Key? key,
+      required this.title,
+      required this.content,
+      required this.showDialogNewNote})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,9 @@ class NewNoteButton extends StatelessWidget {
         width: 350.0,
         height: 40.0,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialogNewNote.showMyDialog(context, title, content);
+          },
           style: TextButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: const Color.fromRGBO(146, 146, 146, 1)),
