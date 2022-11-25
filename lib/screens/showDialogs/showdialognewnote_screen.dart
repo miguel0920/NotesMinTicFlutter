@@ -9,22 +9,27 @@ class ShowDialogNewNote {
       builder: (BuildContext context) {
         return AlertDialog(
           content: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Nombre Nota: '),
-              TextField(
-                keyboardType: TextInputType.text,
-                controller: TextEditingController(text: title),
-                decoration: const InputDecoration(
-                    fillColor: Colors.yellow, filled: true),
-                style: const TextStyle(fontWeight: FontWeight.bold),
+              const Text(
+                'Nombre Nota: ',
+                style: TextStyle(color: Colors.black54, fontSize: 16),
               ),
+              TextField(
+                  autofocus: true,
+                  keyboardType: TextInputType.text,
+                  controller: TextEditingController(text: title),
+                  decoration: const InputDecoration(
+                      hintText: 'Titulo',
+                      fillColor: Colors.yellow,
+                      filled: true)),
               const SizedBox(
                 height: 10.0,
               ),
-              const Text('Contenido Nota: '),
+              const Text('Contenido Nota: ',
+                  style: TextStyle(color: Colors.black54)),
               TextField(
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
@@ -32,13 +37,18 @@ class ShowDialogNewNote {
                   maxLength: 1000,
                   controller: TextEditingController(text: content),
                   decoration: const InputDecoration(
-                      fillColor: Colors.yellow, filled: true))
+                      hintText: 'Descripción',
+                      fillColor: Colors.yellow,
+                      filled: true))
             ],
           ),
           actionsAlignment: MainAxisAlignment.spaceAround,
           actions: <Widget>[
             TextButton(
               style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0))),
                   padding: MaterialStateProperty.all<EdgeInsets>(
                       const EdgeInsets.only(
                           top: 20, bottom: 20, left: 10, right: 10)),
@@ -52,6 +62,9 @@ class ShowDialogNewNote {
             ),
             TextButton(
               style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0))),
                   padding: MaterialStateProperty.all<EdgeInsets>(
                       const EdgeInsets.only(
                           top: 20, bottom: 20, left: 10, right: 10)),

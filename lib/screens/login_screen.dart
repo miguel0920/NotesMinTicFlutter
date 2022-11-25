@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
 
@@ -27,12 +28,14 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('NOTapp',
-                  style: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
-              Image.asset('images/logo_login.png', width: 140.0, height: 160.0),
+              SvgPicture.asset(
+                '../assets/images/logo_login.svg',
+                matchTextDirection: true,
+                width: 140.0,
+                height: 160.0,
+                semanticsLabel: 'NOTapp Logo',
+                allowDrawingOutsideViewBox: true,
+              ),
               const SizedBox(
                 height: 40.0,
               ),

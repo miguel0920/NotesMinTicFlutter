@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noteminticflutter/screens/mytextfielpassword_screen.dart';
 import 'package:noteminticflutter/appState.dart';
 
@@ -26,16 +27,14 @@ class Registration extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Registro',
-                  style: TextStyle(fontSize: 24.0, color: Colors.black)),
-              const Text('NOTapp',
-                  style: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
-              Image.asset('images/logo_login.png', width: 80.0, height: 100.0),
+              SvgPicture.asset(
+                '../assets/images/logo_register.svg',
+                matchTextDirection: true,
+                semanticsLabel: 'NOTapp Logo register',
+                allowDrawingOutsideViewBox: true,
+              ),
               const SizedBox(
-                height: 40.0,
+                height: 25.0,
               ),
               Form(
                 key: _formKey,
