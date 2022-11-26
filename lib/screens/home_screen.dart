@@ -3,28 +3,65 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:noteminticflutter/appState.dart';
 import 'package:noteminticflutter/screens/newnotebutton_screen.dart';
-import 'package:noteminticflutter/screens/note_screen.dart';
 import 'package:noteminticflutter/screens/showDialogs/showdialognewnote_screen.dart';
 
 class Home extends StatelessWidget {
   final AppState state;
+  static final europeanCountries = [
+    'Nota 1',
+    'Nota 2',
+    'Nota 3',
+    'Nota 4',
+    'Nota 5',
+    'Nota 6',
+    'Nota 7',
+    'Nota 8',
+    'Nota 9',
+    'Nota 10',
+    'Nota 11',
+    'Nota 12'
+  ];
   static ShowDialogNewNote showDialogNewNote = ShowDialogNewNote();
   const Home({Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //final String name = state.user!.displayName ?? '';
+    final String name = state.user!.displayName ?? '';
     return Scaffold(
       backgroundColor: const Color.fromRGBO(91, 91, 90, 1),
       body: Column(children: [
         NewNoteButton(
-            title: '', content: '', showDialogNewNote: showDialogNewNote),
-        const Note()
+          title: '',
+          content: '',
+          showDialogNewNote: showDialogNewNote,
+          state: state,
+        ),
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(7.0),
+            itemCount: europeanCountries.length,
+            itemBuilder: (context, index) {
+              return Card(
+                  color: const Color.fromRGBO(217, 217, 217, 1),
+                  child: ListTile(
+                      title: Text(
+                        europeanCountries[index],
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18.0),
+                      ),
+                      onTap: () => {
+                            Navigator.of(context)
+                                .pushReplacementNamed('/register'),
+                            print(europeanCountries[index])
+                          }));
+            },
+          ),
+        ),
       ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialogLogOut(context, 'Miguel');
+          showDialogLogOut(context, name);
         },
         backgroundColor: Colors.yellow,
         shape: const RoundedRectangleBorder(

@@ -5,10 +5,16 @@ class Note {
   final String title;
   final String notecontent;
   final Timestamp createDateTime;
-  final Timestamp updateDateTime;
+  final Timestamp? updateDateTime;
   final bool isActive;
   final String userId;
 
-  Note(this.id, this.title, this.notecontent, this.createDateTime,
-      this.updateDateTime, this.isActive, this.userId);
+  Note(
+      {required this.id,
+      required this.title,
+      required this.notecontent,
+      required this.createDateTime,
+      required this.updateDateTime,
+      required this.isActive,
+      required this.userId});
 }

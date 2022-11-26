@@ -106,28 +106,28 @@ class LoginScreen extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                // try {
-                                //   await state
-                                //       .logIn(email.text, password)
-                                //       .then((value) => {
-                                //             if (state.user != null)
-                                //               {
-                                //                 Navigator.of(context)
-                                //                     .pushReplacementNamed(
-                                //                   '/home',
-                                //                 )
-                                //               }
-                                //           });
-                                // } catch (e) {
-                                //   ScaffoldMessenger.of(context)
-                                //       .showSnackBar(const SnackBar(
-                                //     content: Text(
-                                //         "Usuario o contraseña incorrecta."),
-                                //   ));
-                                // }
-                                Navigator.of(context).pushReplacementNamed(
-                                  '/home',
-                                );
+                                try {
+                                  await state
+                                      .logIn(email.text, password)
+                                      .then((value) => {
+                                            if (state.user != null)
+                                              {
+                                                Navigator.of(context)
+                                                    .pushReplacementNamed(
+                                                  '/home',
+                                                )
+                                              }
+                                          });
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(
+                                        "${e.toString()} Usuario o contraseña incorrecta."),
+                                  ));
+                                }
+                                // Navigator.of(context).pushReplacementNamed(
+                                //   '/home',
+                                // );
                               }
                             },
                             style: ButtonStyle(

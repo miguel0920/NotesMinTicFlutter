@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:noteminticflutter/appState.dart';
+import 'package:noteminticflutter/models/note.dart';
+
+import 'package:uuid/uuid.dart';
 
 class ShowDialogNewNote {
-  Future<void> showMyDialog(
-      BuildContext context, String title, String content) async {
+  static TextEditingController title = TextEditingController();
+  static TextEditingController content = TextEditingController();
+
+  Future<void> showMyDialog(BuildContext context, AppState state) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           content: Column(
@@ -20,7 +27,7 @@ class ShowDialogNewNote {
               TextField(
                   autofocus: true,
                   keyboardType: TextInputType.text,
-                  controller: TextEditingController(text: title),
+                  controller: title,
                   decoration: const InputDecoration(
                       hintText: 'Titulo',
                       fillColor: Colors.yellow,
@@ -35,7 +42,7 @@ class ShowDialogNewNote {
                   minLines: 3,
                   maxLines: 5,
                   maxLength: 1000,
-                  controller: TextEditingController(text: content),
+                  controller: content,
                   decoration: const InputDecoration(
                       hintText: 'Descripción',
                       fillColor: Colors.yellow,
@@ -70,7 +77,17 @@ class ShowDialogNewNote {
                           top: 20, bottom: 20, left: 10, right: 10)),
                   backgroundColor: MaterialStateProperty.all<Color>(
                       const Color.fromRGBO(1, 255, 26, 1))),
-              onPressed: () => Navigator.pop(context, 'OK'),
+              onPressed: () => {
+                state.addNote(Note(
+                    id: const Uuid().v1().toString(),
+                    title: title.text,
+                    notecontent: content.text,
+                    createDateTime: Timestamp.now(),
+                    updateDateTime: null,
+                    isActive: true,
+                    userId: state.user!.uid)),
+                Navigator.pop(context, 'OK')
+              },
               child: const Text(
                 'CREAR',
                 style:

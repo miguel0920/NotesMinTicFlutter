@@ -19,6 +19,7 @@ class MyTextFielPassword extends StatefulWidget {
 
 class _MyTextFielPassword extends State<MyTextFielPassword> {
   bool hidePassword = true;
+  TextEditingController textPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -27,7 +28,7 @@ class _MyTextFielPassword extends State<MyTextFielPassword> {
           hidePassword = false;
         },
         obscureText: hidePassword,
-        controller: TextEditingController(text: 'Admin@123'),
+        controller: textPassword,
         style: TextStyle(color: widget.textStyleColor),
         decoration: InputDecoration(
           suffixIcon: IconButton(
@@ -38,6 +39,7 @@ class _MyTextFielPassword extends State<MyTextFielPassword> {
             onPressed: () {
               setState(() {
                 hidePassword = !hidePassword;
+                widget.passwordChange(textPassword.text);
               });
             },
           ),
